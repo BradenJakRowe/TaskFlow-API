@@ -14,7 +14,7 @@ TaskFlow is a task management REST API built with C# and ASP.NET Core. It allows
 ## Technologies
 
 - **Language:** C#
-- **Framework:** ASP.NET Core Minimal APIs
+- **Framework:** ASP.NET Core API
 - **API Documentation:** Swagger / OpenAPI
 - **Data Storage:** In-memory storage (currently)
 - **Development Environment:** Visual Studio 2022
