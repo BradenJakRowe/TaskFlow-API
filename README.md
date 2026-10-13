@@ -20,6 +20,7 @@ This is a portfolio project to demonstrate my abilities in development using C#,
 - Version Control: Github
 
 **Project Status**
+- Currently in development 
 
 **Prerequisites**
 - Visual Studio 2022
