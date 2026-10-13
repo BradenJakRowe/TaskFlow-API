@@ -44,6 +44,17 @@ namespace Taskflow.Api.Services
             return true;
         }
 
+        public bool Delete(int id)
+        {
+            var task = GetById(id);
+
+            if (task is null)
+                return false;
+
+            _tasks.Remove(task);
+            return true;
+        }
+
 
 
     }
