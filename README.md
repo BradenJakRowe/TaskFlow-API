@@ -1,29 +1,55 @@
-**Taskflow**
+# TaskFlow — Task Management API
 
-Taskflow is a task management application designed to help users organise their workload, manage tasks, and track their progress.
+TaskFlow is a task management REST API built with C# and ASP.NET Core. It allows users to create, retrieve, update and delete tasks, with support for due dates, priorities and task statuses.
 
-This is a portfolio project to demonstrate my abilities in development using C#, RESTful API development, OO programming, and database integration in the software development process.
+## Features
 
-**Features**
+- Create tasks with titles, descriptions, due dates and priorities.
+- Retrieve all tasks or retrieve an individual task by ID.
+- Update task details and statuses.
+- Delete tasks.
+- Represent task priorities and statuses using readable JSON enum values.
+- Explore and test API endpoints using Swagger UI.
 
-- Create new tasks
-- View and retrieve tasks
-- Update tasks and completion status
-- Delete Tasks
-- Organise and manage tasks through the RESTful API
+## Technologies
 
-**Technologies**
-- Language: C#
-- Framework: ASP.NET Core Web API
-- Database: SQL Server
-- Data Access: Entity Framework Core
-- Version Control: Github
+- **Language:** C#
+- **Framework:** ASP.NET Core API
+- **API Documentation:** Swagger / OpenAPI
+- **Data Storage:** In-memory storage (currently)
+- **Development Environment:** Visual Studio 2022
+- **Version Control:** Git and GitHub
 
-**Project Status**
-- Currently in development 
+## API Endpoints
 
-**Prerequisites**
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/tasks` | Retrieve all tasks |
+| GET | `/api/tasks/{id}` | Retrieve a task by ID |
+| POST | `/api/tasks` | Create a task |
+| PUT | `/api/tasks/{id}` | Update a task |
+| DELETE | `/api/tasks/{id}` | Delete a task |
+
+## Prerequisites
+
 - Visual Studio 2022
-- .NET 8.0 SDK
-- SQL Server and Entity Framework Core 
-  
+- .NET 8 SDK
+
+## Running the Project
+
+1. Clone the repository.
+2. Open `Taskflow.Api.sln` in Visual Studio 2022.
+3. Restore NuGet packages.
+4. Run the `Taskflow.Api` project.
+5. Open the Swagger UI address shown when the application starts.
+
+## Current Limitations
+
+Tasks are currently stored in memory and are lost when the application restarts.
+
+## Planned Improvements
+
+- Integrate SQL Server using Entity Framework Core.
+- Add input validation and consistent error handling.
+- Implement automated unit and integration tests.
+- Develop a user interface for managing tasks.
