@@ -1,35 +1,45 @@
-﻿using Taskflow.Api.Models;
+﻿
+using Microsoft.EntityFrameworkCore;
+using Taskflow.Api.Data;
+using Taskflow.Api.Models;
 
 namespace Taskflow.Api.Services
 {
     public class TaskService
     {
-        private readonly List<TaskItem> _tasks = new();
-        private int _nextId = 1;
+        private readonly TaskDbContext _context;
 
-        public List<TaskItem> GetAll()
+        public TaskService(TaskDbContext context)
         {
-            return _tasks;
+            _context = context;
         }
 
-        public TaskItem? GetById(int id)
+        public async Task<List<TaskItem>> GetAllAsync()
         {
-            return _tasks.FirstOrDefault(t => t.Id == id);
+            return await _context.Tasks.ToListAsync();
         }
 
-        public TaskItem Create(TaskItem task)
+        public async Task<TaskItem?> GetByIdAsync(int id)
         {
-            task.Id = _nextId++;
+            return await _context.Tasks
+                .FirstOrDefaultAsync(t => t.Id == id);
+        }
+
+        public async Task<TaskItem> CreateAsync(TaskItem task)
+        {
+            task.Id = 0;
             task.CreatedAt = DateTime.UtcNow;
-            _tasks.Add(task);
+
+            _context.Tasks.Add(task);
+            await _context.SaveChangesAsync();
 
             return task;
         }
 
-        public bool Update(int id, TaskItem updatedTask)
+        public async Task<bool> UpdateAsync(int id, TaskItem updatedTask)
         {
+            var task = await GetByIdAsync(id);
 
-            var task = GetById(id);
             if (task is null)
             {
                 return false;
@@ -41,21 +51,24 @@ namespace Taskflow.Api.Services
             task.DueDate = updatedTask.DueDate;
             task.Priority = updatedTask.Priority;
 
+            await _context.SaveChangesAsync();
+
             return true;
         }
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var task = GetById(id);
+            var task = await GetByIdAsync(id);
 
             if (task is null)
+            {
                 return false;
+            }
 
-            _tasks.Remove(task);
+            _context.Tasks.Remove(task);
+            await _context.SaveChangesAsync();
+
             return true;
         }
-
-
-
     }
 }
